@@ -6,37 +6,8 @@ import {Close} from '@material-ui/icons'
 import ProcessOverview from './ProcessOverview'
 import Form from './Form'
 import Thanks from './Thanks'
+import {modalStyles} from './styles'
 
-
-const styles = {
-  background: {
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    position: 'fixed',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10,
-  },
-  content: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    paddingTop: 0,
-  },
-  modalBody: {
-    backgroundColor: '#fff',
-    padding: 10,
-    width: '80%',
-    maxWidth: 480,
-    minHeight: 600,
-    zIndex: 11,
-  },
-}
 
 const modalRoot = document.getElementById('modal-portal')
 
@@ -62,6 +33,8 @@ class walkthroughModal extends Component {
     if (step > 2) {
       localStorage.setItem('applied', 'true')
       close()
+    } if (step < 0) {
+      close()
     }
     return createPortal(
       <div className={classes.background} onClick={close}>
@@ -72,9 +45,9 @@ class walkthroughModal extends Component {
                 <Close/>
               </IconButton>}/>
           <CardContent className={classes.content}>
-            {step === 0 && <ProcessOverview move={this.move}/>}
-            {step === 1 && <Form move={this.move}/>}
-            {step === 2 && <Thanks move={this.move}/>}
+            {step === 0 && <ProcessOverview move={this.move} {...this.props}/>}
+            {step === 1 && <Form move={this.move(1)} {...this.props}/>}
+            {step === 2 && <Thanks move={this.move} {...this.props}/>}
           </CardContent>
         </Card>
       </div>,
@@ -84,4 +57,4 @@ class walkthroughModal extends Component {
 
 }
 
-export const WalkthroughModal = injectSheet(styles)(walkthroughModal)
+export const WalkthroughModal = injectSheet(modalStyles)(walkthroughModal)

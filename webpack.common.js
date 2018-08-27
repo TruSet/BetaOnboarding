@@ -4,10 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    app: [
-      'webpack-hot-middleware/client',
-      './app/index.js'
-    ]
+    app: './app/index.js'
   },
   module: {
     rules: [
