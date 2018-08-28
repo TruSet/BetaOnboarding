@@ -9,21 +9,11 @@ import Thanks from './Thanks'
 import {modalStyles} from './styles'
 
 
-const modalRoot = document.getElementById('modal-portal')
-
 class walkthroughModal extends Component {
   state = {
     step: 0
   }
-  el = document.createElement('div')
-
-  componentDidMount() {
-    modalRoot.appendChild(this.el)
-  }
-
-  componentWillUnmount() {
-    modalRoot.removeChild(this.el)
-  }
+  modalRoot = document.getElementById('modal-portal')
 
   move = i => () => this.setState(({step}) => ({step: step + i}))
 
@@ -33,7 +23,8 @@ class walkthroughModal extends Component {
     if (step > 2) {
       localStorage.setItem('applied', 'true')
       close()
-    } if (step < 0) {
+    }
+    if (step < 0) {
       close()
     }
     return createPortal(
@@ -51,7 +42,7 @@ class walkthroughModal extends Component {
           </CardContent>
         </Card>
       </div>,
-      this.el
+      this.modalRoot
     )
   }
 

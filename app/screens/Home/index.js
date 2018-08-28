@@ -27,11 +27,6 @@ class home extends Component {
     modal: false,
   }
 
-  DEVCLEAR = () => {
-    localStorage.clear()
-    this.forceUpdate()
-  }
-
   toggleModal = modal => () => this.setState({modal})
 
   render() {
@@ -41,7 +36,7 @@ class home extends Component {
       <div className={classes.root}>
         {modal && <WalkthroughModal close={this.toggleModal(false)}/>}
           <h3>TruSet Beta</h3>
-          <div onClick={this.DEVCLEAR}>
+          <div>
             {!localStorage.getItem('applied')
               ? <Button variant='outlined' onClick={this.toggleModal(true)}>Apply Now</Button>
               : <span className={classes.thanks}>thanks for applying!</span>}
