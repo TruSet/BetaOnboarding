@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 })
 
-export default injectSheet(styles)(({classes, close}) =>
+const Thanks = injectSheet(styles)(({classes, close}) =>
   <div className={classes.root}>
     <LogoBlack height={100} width={150}/>
     <h2 style={{alignSelf: 'flex-start'}}>Thanks for your application!</h2>
@@ -32,3 +32,7 @@ export default injectSheet(styles)(({classes, close}) =>
     </Button>
   </div>
 )
+
+Thanks.displayName = 'Thanks'
+
+export default Thanks

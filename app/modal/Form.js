@@ -116,4 +116,7 @@ class form extends Component {
   }
 }
 
-export default injectSheet(styles)(form)
+const Form = injectSheet(styles)(form)
+Form.displayName = 'Form'
+
+export default Form

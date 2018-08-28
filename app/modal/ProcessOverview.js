@@ -38,7 +38,7 @@ const styles = theme => ({
     fontWeight: 'bold'
   },
 })
-export default injectSheet(styles)(({classes, move}) =>
+const ProcessOverview = injectSheet(styles)(({classes, move}) =>
   <div className={classes.root}>
     <LogoBlack height={100} width={150}/>
     <h2 style={{alignSelf: 'flex-start'}}>Apply for TruSet Beta Access</h2>
@@ -69,3 +69,5 @@ export default injectSheet(styles)(({classes, move}) =>
     </div>
   </div>
 )
+ProcessOverview.displayName = 'ProcessOverview'
+export default ProcessOverview
