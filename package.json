@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "clean": "rimraf dist",
-    "lint": "eslint src",
+    "lint": "eslint app",
     "dev": "cross-env NODE_ENV=development node ./index.js",
     "start": "yarn build && node ./index.js",
     "test": "jest"
