@@ -28,7 +28,7 @@ module.exports = {
     new HtmlWebpackPlugin({title: 'TruSet Beta', template: './app/index.html'}),
   ],
   output: {
-    filename: '[name].[hash].bundle.js',
+    filename: '[name].bundle.js',
     path: resolve(__dirname, 'dist'),
     publicPath: '/',
   }

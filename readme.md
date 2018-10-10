@@ -25,3 +25,6 @@ The beta page on our site currently has a `<div id="root"><div/>` for the script
 2. Consider [EIP 1077](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1077.md) or Austin Griffith's [bouncer proxy contract](https://github.com/austintgriffith/bouncer-proxy/blob/master/BouncerProxy/BouncerProxy.sol) for the whitelisting transaction.
     1. A user signs a transaction with their new metamask account that includes the access key.
     2. The dapp sends this transaction to a server which constructs a transaction itself and pays all gas.
+
+## Future Improvements
+1. Single step build and deploy so we don't have to manually update squarespace with the new js url
