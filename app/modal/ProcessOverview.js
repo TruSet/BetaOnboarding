@@ -1,8 +1,8 @@
 import React from 'react'
 import injectSheet from 'react-jss'
 import Button from '@material-ui/core/Button'
-import LogoBlack from '../static/TruSet Beta Logotype black'
 import {modalStyles} from './styles'
+import Logo from '../static/trueset_logotype.png'
 
 const styles = theme => ({
   ...modalStyles(theme),
@@ -23,6 +23,7 @@ const styles = theme => ({
     width: '2.5em',
   },
   logo: {
+    marginBottom: 15,
     width: 150,
   },
   step: {
@@ -32,6 +33,7 @@ const styles = theme => ({
     gridTemplateRows: '1fr 1fr',
     gridTemplateColumns: '3em auto',
     margin: '20px 0',
+    maxHeight: 90,
   },
   subTitle: {},
   title: {
@@ -40,12 +42,11 @@ const styles = theme => ({
 })
 const ProcessOverview = injectSheet(styles)(({classes, move}) =>
   <div className={classes.root}>
-    <LogoBlack height={100} width={150}/>
+    <img src={Logo} alt="" className={classes.logo}/>
     <h2 style={{alignSelf: 'flex-start'}}>Apply for TruSet Beta Access</h2>
     <div>
-      We are looking for individuals to publish and validate documentation for token projects. We take our
-      community seriously – before you can join TruSet and start earning money, we will need to first verify
-      your contact information.
+      With with TruSet to publish and review reference data for token projects and earn potential rewards for your contributions.
+      We take our community seriously, so before you can join TruSet and start earning rewards, we will need to first verify your contact information.
     </div>
     <div className={classes.step}>
       <div className={classes.icon}>1</div>
@@ -54,8 +55,11 @@ const ProcessOverview = injectSheet(styles)(({classes, move}) =>
     </div>
     <div className={classes.step}>
       <div className={classes.icon}>2</div>
-      <div className={classes.title}>Wait for confirmation and access</div>
-      <div className={classes.subTitle}>First access will be given on {}</div>
+      <div className={classes.title}>Wait for a welcome email</div>
+      <div className={classes.subTitle}>
+        We will send a welcome email once the Beta launches.
+        You will need to verify your contact info for access.
+      </div>
     </div>
     <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 12, width: '100%'}}>
       <Button onClick={move(-1)} className={classes.button}

@@ -2,15 +2,28 @@ import React, {Component} from 'react'
 import injectSheet from 'react-jss'
 // import DateTime from 'luxon'
 import Button from '@material-ui/core/Button'
+import Select from 'react-select'
+import {AsYouType, parseNumber} from 'libphonenumber-js'
 import {modalStyles} from './styles'
+import theme from '../theme'
+import countries from './countries'
+import {jsonPost} from '../api'
+
+let options = Object
+  .entries(countries)
+  .map(([code, value]) => ({
+    code,
+    label: value
+  }))
 
 const styles = theme => ({
   ...modalStyles(theme),
   root: {
     alignItems: 'center',
     display: 'grid',
+    gridGap: '12px',
     gridTemplateColumns: '1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
+    gridTemplateRows: '1fr 1fr 1fr 1fr 60px 80px auto',
     height: '100%',
     marginBottom: 18,
   },
@@ -22,12 +35,18 @@ const styles = theme => ({
   checkBox: {
     alignItems: 'center',
     backgroundColor: '#efefef',
+    cursor: 'pointer',
     display: 'flex',
+    flexDirection: 'row',
     fontSize: '0.9em',
     gridColumn: '1 / 3',
-    height: '1.8em',
-    marginBottom: 18,
-    padding: '18px 6px',
+    height: '100%',
+    justifyContent: 'flex-start',
+    marginBottom: 12,
+    padding: '12px 0 12px 6px',
+  },
+  checkboxText: {
+    fontWeight: 'bold',
   },
   error: {
     color: theme.palette.accent.red,
@@ -36,10 +55,16 @@ const styles = theme => ({
   },
   input: {
     border: '1px solid black',
-    gridColumn: '1 / 3',
+    flex: '1 1 auto',
     lineHeight: '1.5em',
-    margin: '6px 0 18px 0',
+    margin: '12px 0',
     padding: '4px 0 4px 6px',
+  },
+  phoneInput: {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%'
   },
   submitButton: {
     backgroundColor: theme.palette.primary.main,
@@ -49,6 +74,35 @@ const styles = theme => ({
   }
 })
 
+const selectStyles = {
+  container: (base) => ({
+    ...base,
+    fontSize: '13px',
+    marginRight: '12px'
+  }),
+  control: (base) => ({
+    ...base,
+    borderRadius: '0px',
+    border: '1px solid black',
+    height: '30px',
+    minHeight: '30px',
+    minWidth: '180px'
+  }),
+  option: (base) => ({
+    ...base,
+    backgroundColor: 'white',
+    color: 'black',
+  }),
+  placeholder: (base) => ({
+    ...base,
+    ...theme.typography.body1
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: 'black',
+  })
+}
+
 // https://stackoverflow.com/a/46181/3735060
 const validateEmail = email =>
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -56,52 +110,132 @@ const validateEmail = email =>
 
 class form extends Component {
   state = {
+    code: 'US',
+    country: 'United States',
     email: '',
-    name: '',
+    family: '',
+    given: '',
+    phone: '',
+    terms: false,
     updates: false,
+    username: '',
   }
 
   handleChange = ({target: {checked, name, type, value}}) =>
     this.setState({
       [name]: type === 'checkbox' ? checked : value,
-      error: ''
+      error: '',
     })
 
+  toggle = name => () => this.setState({error: '', [name]: !this.state[name]})
+
+  handleSelectChange = ({code = 'US', label = 'United States'}) =>
+    this.setState({code, country: label, error: ''}, () => {
+      this.handlePhoneChange({target: {value: this.state.phone}})
+    })
+
+  handlePhoneChange = ({target: {value}}) => {
+    const formatter = new AsYouType(this.state.code)
+    let newValue = formatter.input(value)
+    // this keeps backspace from getting stuck when the caret hits ")"
+    if (newValue === this.state.phone) {
+      newValue = value
+    }
+    this.setState({
+      phone: newValue,
+      error: '',
+    }, () => {
+      const parsed = parseNumber(newValue, this.state.code, {extended: true})
+      if (parsed.valid) {
+        const codeValue = `+${parsed.countryCallingCode} ${newValue}`
+        const isValid = parseNumber(codeValue, this.state.code, {extended: true}).valid
+        this.setState({
+          phone: isValid ? codeValue : newValue,
+          error: '',
+        })
+      }
+    })
+  }
+
   submit = () => {
-    const {name, email} = this.state
-    if (name && email && validateEmail(email)) {
-      // post the user info to a server that will send emails and
-      // eslint-disable-next-line no-undef
-      // _cio.identify({
-      //   id: Math.random().toString().substring(2, 6) + Math.random().toString().substring(2, 6),
-      //   email: this.state.email,
-      //   created_at: new DateTime({}).ts,
-      //   first_name: this.state.name,
-      // })
-      localStorage.setItem('applied', 'true')
-      this.props.move()
+    const {code, country, email, family, given, phone, terms, updates, username} = this.state
+    const validEmail = email && validateEmail(email)
+    const validPhone = phone && parseNumber(phone, code, {extended: true}).valid
+    if (given && family && phone && validEmail && validPhone && terms) {
+      // post the user info to a server that will save it.
+      // todo: make this url the correct endpoint
+      fetch('https://www.truset.com/user/new/', jsonPost({
+        country,
+        email,
+        family,
+        given,
+        phone,
+        updates,
+        username
+      }))
+        .then(() => {
+          localStorage.setItem('applied', 'true')
+          localStorage.setItem('email', email)
+          this.props.move()
+        })
+        .catch(() => {
+          this.setState({error: 'There was an error saving your information. Please try again later.'})
+        })
     } else {
-      this.setState({error: 'Please provide a valid email address and name.'})
+      this.setState({error: 'Please accept the terms and provide a valid email address, phone number, and name.'})
     }
   }
 
   render() {
     const {classes, close} = this.props
-    const {email, error, name, updates} = this.state
+    const {code, country, email, error, family, given, phone, terms, updates, username} = this.state
     return (
       <div className={classes.root}>
         <h2 style={{gridColumn: '1 / 3'}}>Apply for TruSet Beta Access</h2>
-        <input type="text" placeholder='Name'
+        <input type="text" placeholder='Given Name'
                className={classes.input}
-               name='name' value={name} onChange={this.handleChange}/>
+               style={{gridColumn: '1 / 2'}}
+               name='given' value={given} onChange={this.handleChange}/>
+        <input type="text" placeholder='Family Name'
+               className={classes.input}
+               style={{gridColumn: '2 / 3'}}
+               name='family' value={family} onChange={this.handleChange}/>
         <input type="text" placeholder='Email'
                className={classes.input}
+               style={{gridColumn: '1 / 3'}}
                name='email' value={email} onChange={this.handleChange}/>
-        <label htmlFor="updates" className={classes.checkBox}>
-          <input type="checkbox" name='updates' checked={updates} onChange={this.handleChange}/>
+        <div className={classes.phoneInput} style={{gridColumn: '1 / 3'}}>
+          <Select styles={selectStyles} placeholder='Country'
+                  value={{code, label: country}} options={options} onChange={this.handleSelectChange}/>
+          <input type="text" placeholder='Phone Number'
+                 className={classes.input}
+                 name='phone' value={phone} onChange={this.handlePhoneChange}/>
+        </div>
+        <input type="text" placeholder='Preferred Username'
+               className={classes.input}
+               style={{gridColumn: '1 / 3'}}
+               name='username' value={username} onChange={this.handleChange}/>
+        <div className={classes.checkBox} onClick={this.toggle('terms')}>
+          <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={terms}/>
           &nbsp;
-          I would like TruSet to save my email for future updates.
-        </label>
+          <div className={classes.checkboxText}>
+            I accept the TruSet <a
+            href="/terms-of-use/" target="_blank">Terms of Use</a> & <a
+            href="/privacy-policy/" target="_blank">Privacy Policy</a>
+          </div>
+        </div>
+        <div className={classes.checkBox} onClick={this.toggle('updates')}>
+          <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={updates}/>
+          &nbsp;
+          <div style={{width: '100%'}}>
+            <div className={classes.checkboxText}>I want to receive important email updates and offers from TruSet. (We
+              respect your email privacy.)
+            </div>
+            <div>You may change your mind ay any time by contacting us at info@truset.com or unsubscribe via a link in
+              any of our emails.
+            </div>
+          </div>
+        </div>
         <Button className={classes.cancelButton} onClick={close}
                 variant='outlined'>
           Cancel

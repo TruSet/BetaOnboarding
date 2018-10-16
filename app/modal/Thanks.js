@@ -1,6 +1,5 @@
 import React from 'react'
 import injectSheet from 'react-jss'
-import LogoBlack from '../static/TruSet Beta Logotype black'
 import {modalStyles} from './styles'
 import Button from '@material-ui/core/Button'
 
@@ -19,9 +18,13 @@ const styles = theme => ({
 
 const Thanks = injectSheet(styles)(({classes, close}) =>
   <div className={classes.root}>
-    <LogoBlack height={100} width={150}/>
-    <h2 style={{alignSelf: 'flex-start'}}>Thanks for your application!</h2>
-    <div>Look out for an email from our team within the next few days granting access.</div>
+    <img src="/truset_logotype.png" alt=""/>
+    <h2 style={{alignSelf: 'flex-start'}}>We will be in touch soon!</h2>
+    <div>
+      Once the Beta is launched an email with an activation link will be sent
+      to {localStorage.getItem('email') || 'the email address you provided'}.
+    </div>
+    <br/>
     <div>
       In the meantime, check out MetaMask if you dont already have it installed, as you will need it to access our
       application.

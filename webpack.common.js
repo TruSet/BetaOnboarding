@@ -21,6 +21,17 @@ module.exports = {
           },
         }],
       },
+      {
+        test: /\.(png|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            }
+          }
+        ]
+      }
     ],
   },
   plugins: [
