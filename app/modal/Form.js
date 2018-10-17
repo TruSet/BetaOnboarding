@@ -42,9 +42,11 @@ const styles = theme => ({
     gridColumn: '1 / 3',
     height: '100%',
     justifyContent: 'flex-start',
+    lineHeight: '1.3em',
     padding: '0 0 0 6px',
   },
   checkboxText: {
+    fontSize: '13px',
     fontWeight: 'bold',
   },
   error: {
@@ -228,7 +230,7 @@ class form extends Component {
             <div className={classes.checkboxText}>I want to receive important email updates and offers from TruSet. (We
               respect your email privacy.)
             </div>
-            <div>You may change your mind ay any time by contacting us at info@truset.com or unsubscribe via a link in
+            <div style={{ fontSize: '12px' }}>You may change your mind ay any time by contacting us at info@truset.com or unsubscribe via a link in
               any of our emails.
             </div>
           </div>
@@ -237,7 +239,7 @@ class form extends Component {
                 variant='outlined'>
           Cancel
         </Button>
-        <Button onClick={this.submit} className={classes.button}
+        <Button className={classes.submitButton} onClick={this.submit}
                 variant='contained' color='primary'>
           Submit
         </Button>
