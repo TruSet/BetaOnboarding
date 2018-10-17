@@ -58,7 +58,7 @@ const styles = theme => ({
     padding: '4px 0 4px 6px',
   },
   phoneInput: {
-    alignItems: 'center',
+    alignItems: 'baseline',
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%'
@@ -74,13 +74,14 @@ const styles = theme => ({
 const selectStyles = {
   container: (base) => ({
     ...base,
-    fontSize: '13px',
+    fontFamily: 'Glober, Muli, Asap, Roboto, sans-serif',
+    fontSize: '0.95rem',
     marginRight: '12px'
   }),
   control: (base) => ({
     ...base,
-    borderRadius: '0px',
-    height: '30px',
+    borderRadius: '2px',
+    height: '40px',
     minHeight: '30px',
     minWidth: '180px'
   }),
@@ -223,7 +224,7 @@ class form extends Component {
         <div className={classes.checkBox} onClick={this.toggle('updates')}>
           <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={updates}/>
           &nbsp;
-          <div style={{width: '100%'}}>
+          <div style={{width: '95%'}}>
             <div className={classes.checkboxText}>I want to receive important email updates and offers from TruSet. (We
               respect your email privacy.)
             </div>
