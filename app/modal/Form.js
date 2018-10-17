@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import injectSheet from 'react-jss'
 // import DateTime from 'luxon'
-import Button from '@material-ui/core/Button'
+import {Button, TextField} from '@material-ui/core'
 import Select from 'react-select'
 import {AsYouType, parseNumber} from 'libphonenumber-js'
 import {modalStyles} from './styles'
@@ -23,7 +23,7 @@ const styles = theme => ({
     display: 'grid',
     gridGap: '12px',
     gridTemplateColumns: '1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr 1fr 60px 80px auto',
+    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 90px 100px auto',
     height: '100%',
     marginBottom: 18,
   },
@@ -42,8 +42,7 @@ const styles = theme => ({
     gridColumn: '1 / 3',
     height: '100%',
     justifyContent: 'flex-start',
-    marginBottom: 12,
-    padding: '12px 0 12px 6px',
+    padding: '0 0 0 6px',
   },
   checkboxText: {
     fontWeight: 'bold',
@@ -54,10 +53,8 @@ const styles = theme => ({
     justifySelf: 'center',
   },
   input: {
-    border: '1px solid black',
     flex: '1 1 auto',
-    lineHeight: '1.5em',
-    margin: '12px 0',
+    lineHeight: '1.1em',
     padding: '4px 0 4px 6px',
   },
   phoneInput: {
@@ -83,7 +80,6 @@ const selectStyles = {
   control: (base) => ({
     ...base,
     borderRadius: '0px',
-    border: '1px solid black',
     height: '30px',
     minHeight: '30px',
     minWidth: '180px'
@@ -192,29 +188,29 @@ class form extends Component {
     return (
       <div className={classes.root}>
         <h2 style={{gridColumn: '1 / 3'}}>Apply for TruSet Beta Access</h2>
-        <input type="text" placeholder='Given Name'
-               className={classes.input}
-               style={{gridColumn: '1 / 2'}}
-               name='given' value={given} onChange={this.handleChange}/>
-        <input type="text" placeholder='Family Name'
-               className={classes.input}
-               style={{gridColumn: '2 / 3'}}
-               name='family' value={family} onChange={this.handleChange}/>
-        <input type="text" placeholder='Email'
-               className={classes.input}
-               style={{gridColumn: '1 / 3'}}
-               name='email' value={email} onChange={this.handleChange}/>
+        <TextField className={classes.input}
+                   style={{gridColumn: '1 / 2'}}
+                   label='Given Name' margin='dense'
+                   name='given' value={given} onChange={this.handleChange}/>
+        <TextField className={classes.input}
+                   style={{gridColumn: '2 / 3'}}
+                   label='Family Name' margin='dense'
+                   name='family' value={family} onChange={this.handleChange}/>
+        <TextField className={classes.input}
+                   style={{gridColumn: '1 / 3'}}
+                   label='Email' margin='dense'
+                   name='email' value={email} onChange={this.handleChange}/>
         <div className={classes.phoneInput} style={{gridColumn: '1 / 3'}}>
           <Select styles={selectStyles} placeholder='Country'
                   value={{code, label: country}} options={options} onChange={this.handleSelectChange}/>
-          <input type="text" placeholder='Phone Number'
-                 className={classes.input}
-                 name='phone' value={phone} onChange={this.handlePhoneChange}/>
+          <TextField className={classes.input}
+                     label='Phone Number' margin='dense'
+                     name='phone' value={phone} onChange={this.handlePhoneChange}/>
         </div>
-        <input type="text" placeholder='Preferred Username'
-               className={classes.input}
-               style={{gridColumn: '1 / 3'}}
-               name='username' value={username} onChange={this.handleChange}/>
+        <TextField className={classes.input}
+                   style={{gridColumn: '1 / 3'}}
+                   label='Preferred Username' margin='dense'
+                   name='username' value={username} onChange={this.handleChange}/>
         <div className={classes.checkBox} onClick={this.toggle('terms')}>
           <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={terms}/>
           &nbsp;
