@@ -114,6 +114,7 @@ class form extends Component {
     email: '',
     family: '',
     given: '',
+    loading: false,
     phone: '',
     terms: false,
     updates: false,
@@ -157,31 +158,35 @@ class form extends Component {
   }
 
   submit = () => {
-    const {code, country, email, family, given, phone, terms, updates, username} = this.state
+    const {code, country, email, family, given, loading, phone, terms, updates, username} = this.state
     const validEmail = email && validateEmail(email)
     const validPhone = phone && parseNumber(phone, code, {extended: true}).valid
-    if (given && family && phone && validEmail && validPhone && terms) {
-      // post the user info to a server that will save it.
-      // todo: make this url the correct endpoint
-      fetch('https://www.truset.com/user/new/', jsonPost({
-        country,
-        email,
-        family,
-        given,
-        phone,
-        updates,
-        username
-      }))
-        .then(() => {
-          localStorage.setItem('applied', 'true')
-          localStorage.setItem('email', email)
-          this.props.move()
-        })
-        .catch(() => {
-          this.setState({error: 'There was an error saving your information. Please try again later.'})
-        })
-    } else {
-      this.setState({error: 'Please accept the terms and provide a valid email address, phone number, and name.'})
+    if (!loading) {
+      if (given && family && phone && validEmail && validPhone && terms) {
+        // 'https://truset-new-user-service.herokuapp.com/user/new'
+        // http://localhost:8000/user/new
+        this.setState({loading: true})
+        fetch('https://truset-new-user-service.herokuapp.com/user/new', jsonPost({
+          country,
+          email,
+          family,
+          given,
+          phone,
+          updates,
+          username
+        }))
+          .then(() => {
+            localStorage.setItem('applied', 'true')
+            localStorage.setItem('email', email)
+            this.props.move()
+          })
+          .catch(() => {
+            this.setState({error: 'There was an error saving your information. Please try again later.'})
+          })
+        this.setState({loading: false})
+      } else {
+        this.setState({error: 'Please accept the terms and provide a valid email address, phone number, and name.'})
+      }
     }
   }
 
@@ -230,7 +235,8 @@ class form extends Component {
             <div className={classes.checkboxText}>I want to receive important email updates and offers from TruSet. (We
               respect your email privacy.)
             </div>
-            <div style={{ fontSize: '12px' }}>You may change your mind ay any time by contacting us at info@truset.com or unsubscribe via a link in
+            <div style={{fontSize: '12px'}}>You may change your mind ay any time by contacting us at info@truset.com or
+              unsubscribe via a link in
               any of our emails.
             </div>
           </div>

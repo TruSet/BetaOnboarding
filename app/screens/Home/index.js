@@ -52,7 +52,7 @@ class home extends Component {
                       onClick={this.toggleModal(true)}>
               Join the TruSet Token Beta Community
             </Button>
-            : <span className={classes.thanks}>thanks for applying!</span>}
+            : <span className={classes.thanks}>Thanks for joining!</span>}
         </div>
       </div>
     )
