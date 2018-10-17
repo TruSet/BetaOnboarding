@@ -45,13 +45,13 @@ const ProcessOverview = injectSheet(styles)(({classes, move}) =>
     <img src={Logo} alt="" className={classes.logo}/>
     <h2 style={{alignSelf: 'flex-start'}}>Apply for TruSet Beta Access</h2>
     <div>
-      With with TruSet to publish and review reference data for token projects and earn potential rewards for your contributions.
+      Work with TruSet to publish and review reference data for token projects and earn potential rewards for your contributions.
       We take our community seriously, so before you can join TruSet and start earning rewards, we will need to first verify your contact information.
     </div>
     <div className={classes.step}>
       <div className={classes.icon}>1</div>
-      <div className={classes.title}>Quick apply</div>
-      <div className={classes.subTitle}>Apply with your name and email address</div>
+      <div className={classes.title}>Quickly apply</div>
+      <div className={classes.subTitle}>Apply with your name, email, and phone number</div>
     </div>
     <div className={classes.step}>
       <div className={classes.icon}>2</div>
