@@ -219,8 +219,8 @@ class form extends Component {
           &nbsp;
           <div className={classes.checkboxText}>
             I accept the TruSet <a
-            href="/terms-of-use/" target="_blank">Terms of Use</a> & <a
-            href="/privacy-policy/" target="_blank">Privacy Policy</a>
+            href="/terms-of-use/" target="_blank" rel="noopener noreferrer">Terms of Use</a> & <a
+            href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
           </div>
         </div>
         <div className={classes.checkBox} onClick={this.toggle('updates')}>
