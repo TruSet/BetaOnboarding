@@ -20,11 +20,7 @@ class walkthroughModal extends Component {
   render() {
     const {classes, close} = this.props
     const {step} = this.state
-    if (step > 2) {
-      localStorage.setItem('applied', 'true')
-      close()
-    }
-    if (step < 0) {
+    if (step < 0 || step > 2) {
       close()
     }
     return createPortal(

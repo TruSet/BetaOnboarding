@@ -176,7 +176,6 @@ class form extends Component {
           username
         }))
           .then(() => {
-            localStorage.setItem('applied', 'true')
             localStorage.setItem('email', email)
             this.props.move()
           })

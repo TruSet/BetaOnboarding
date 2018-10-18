@@ -43,16 +43,14 @@ class home extends Component {
       <div className={classes.root}>
         {modal && <WalkthroughModal close={this.toggleModal(false)}/>}
         <div>
-          {!localStorage.getItem('applied')
-            ? <Button variant='contained' color='primary'
-                      classes={{
-                        root: classes.button,
-                        label: classes.buttonText,
-                      }}
-                      onClick={this.toggleModal(true)}>
-              Join the TruSet Token Beta Community
-            </Button>
-            : <span className={classes.thanks}>Thanks for joining!</span>}
+          <Button variant='contained' color='primary'
+                  classes={{
+                    root: classes.button,
+                    label: classes.buttonText,
+                  }}
+                  onClick={this.toggleModal(true)}>
+            Join the TruSet Token Beta Community
+          </Button>
         </div>
       </div>
     )

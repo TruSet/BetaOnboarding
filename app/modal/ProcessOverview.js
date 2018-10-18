@@ -2,7 +2,6 @@ import React from 'react'
 import injectSheet from 'react-jss'
 import Button from '@material-ui/core/Button'
 import {modalStyles} from './styles'
-import Logo from '../static/trueset_logotype.png'
 
 const styles = theme => ({
   ...modalStyles(theme),
@@ -22,10 +21,6 @@ const styles = theme => ({
     justifyContent: 'center',
     width: '2.5em',
   },
-  logo: {
-    marginBottom: 15,
-    width: 150,
-  },
   step: {
     alignItems: 'center',
     alignSelf: 'flex-start',
@@ -42,7 +37,6 @@ const styles = theme => ({
 })
 const ProcessOverview = injectSheet(styles)(({classes, move}) =>
   <div className={classes.root}>
-    <img src={Logo} alt="" className={classes.logo}/>
     <h2 style={{alignSelf: 'flex-start'}}>Apply for TruSet Beta Access</h2>
     <div>
       Work with TruSet to publish and review reference data for token projects and earn potential rewards for your contributions.
