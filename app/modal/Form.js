@@ -21,9 +21,9 @@ const styles = theme => ({
   root: {
     alignItems: 'center',
     display: 'grid',
-    gridGap: '12px',
+    gridGap: '8px',
     gridTemplateColumns: '1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 90px 100px auto',
+    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 90px auto auto',
     height: '100%',
     marginBottom: 18,
   },
@@ -56,7 +56,7 @@ const styles = theme => ({
   },
   input: {
     flex: '1 1 auto',
-    lineHeight: '1.1em',
+    lineHeight: '1em',
     padding: '4px 0 4px 6px',
   },
   phoneInput: {

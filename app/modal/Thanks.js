@@ -26,7 +26,8 @@ const Thanks = injectSheet(styles)(({classes, close}) =>
     </div>
     <br/>
     <div>
-      In the meantime, check out MetaMask if you dont already have it installed, as you will need it to access our
+      In the meantime, check out <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> if
+      you dont already have it installed, as you will need it to access our
       application.
     </div>
     <br/><br/>

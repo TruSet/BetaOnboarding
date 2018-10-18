@@ -31,6 +31,9 @@ class walkthroughModal extends Component {
       <div className={classes.background} onClick={close}>
         <Card className={classes.modalBody} onClick={e => e.stopPropagation()}>
           <CardHeader
+            classes={{
+              root: classes.headerRoot
+            }}
             action={
               <IconButton onClick={close}>
                 <Close/>

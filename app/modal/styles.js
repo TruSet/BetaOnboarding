@@ -12,25 +12,32 @@ export const modalStyles = () => ({
     justifyContent: 'center',
     zIndex: 10,
   },
-  content: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    paddingTop: 0,
-  },
-  modalBody: {
-    backgroundColor: '#fff',
-    padding: 10,
-    maxWidth: 480,
-    width: '80%',
-    zIndex: 11,
-  },
   button: {
     alignItems: 'center',
     cursor: 'pointer',
     display: 'flex',
     justifyContent: 'center',
     maxWidth: 120,
-  }
+  },
+  content: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  headerRoot: {
+    padding: '0 24px',
+  },
+  modalBody: {
+    backgroundColor: '#fff',
+    padding: 10,
+    maxHeight: '100vh',
+    maxWidth: 480,
+    minWidth: 375,
+    overflow: 'auto',
+    width: '80%',
+    zIndex: 11,
+  },
 })

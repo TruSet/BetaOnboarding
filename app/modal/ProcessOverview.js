@@ -51,7 +51,7 @@ const ProcessOverview = injectSheet(styles)(({classes, move}) =>
     <div className={classes.step}>
       <div className={classes.icon}>1</div>
       <div className={classes.title}>Quickly apply</div>
-      <div className={classes.subTitle}>Apply with your name, email, and phone number</div>
+      <div className={classes.subTitle}>Apply with your name, email, and phone number.</div>
     </div>
     <div className={classes.step}>
       <div className={classes.icon}>2</div>
