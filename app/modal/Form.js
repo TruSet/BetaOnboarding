@@ -23,7 +23,7 @@ const styles = theme => ({
     display: 'grid',
     gridGap: '8px',
     gridTemplateColumns: '1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 90px auto auto',
+    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 50px auto auto',
     height: '100%',
     marginBottom: 18,
   },
@@ -235,7 +235,7 @@ class form extends Component {
             <div className={classes.checkboxText}>I want to receive important email updates and offers from TruSet. (We
               respect your email privacy.)
             </div>
-            <div style={{fontSize: '12px'}}>You may change your mind ay any time by contacting us at info@truset.com or
+            <div style={{fontSize: '11px'}}>You may change your mind ay any time by contacting us at info@truset.com or
               unsubscribe via a link in
               any of our emails.
             </div>
