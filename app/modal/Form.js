@@ -9,6 +9,7 @@ import theme from '../theme'
 import countries from './countries'
 import {jsonPost} from '../api'
 
+
 let options = Object
   .entries(countries)
   .map(([code, value]) => ({
@@ -177,12 +178,15 @@ class form extends Component {
         }))
           .then(() => {
             localStorage.setItem('email', email)
+            this.setState({loading: false})
             this.props.move()
           })
           .catch(() => {
-            this.setState({error: 'There was an error saving your information. Please try again later.'})
+            this.setState({
+              error: 'There was an error saving your information. Please try again later.',
+              loading: false,
+            })
           })
-        this.setState({loading: false})
       } else {
         this.setState({error: 'Please accept the terms and provide a valid email address, phone number, and name.'})
       }
@@ -196,39 +200,39 @@ class form extends Component {
       <div className={classes.root}>
         <h2 style={{gridColumn: '1 / 3'}}>Apply for TruSet Beta Access</h2>
         <TextField className={classes.input}
-                   style={{gridColumn: '1 / 2'}}
-                   label='Given Name' margin='dense'
-                   name='given' value={given} onChange={this.handleChange}/>
+          style={{gridColumn: '1 / 2'}}
+          label='Given Name' margin='dense'
+          name='given' value={given} onChange={this.handleChange} />
         <TextField className={classes.input}
-                   style={{gridColumn: '2 / 3'}}
-                   label='Family Name' margin='dense'
-                   name='family' value={family} onChange={this.handleChange}/>
+          style={{gridColumn: '2 / 3'}}
+          label='Family Name' margin='dense'
+          name='family' value={family} onChange={this.handleChange} />
         <TextField className={classes.input}
-                   style={{gridColumn: '1 / 3'}}
-                   label='Email' margin='dense'
-                   name='email' value={email} onChange={this.handleChange}/>
+          style={{gridColumn: '1 / 3'}}
+          label='Email' margin='dense'
+          name='email' value={email} onChange={this.handleChange} />
         <div className={classes.phoneInput} style={{gridColumn: '1 / 3'}}>
           <Select styles={selectStyles} placeholder='Country'
-                  value={{code, label: country}} options={options} onChange={this.handleSelectChange}/>
+            value={{code, label: country}} options={options} onChange={this.handleSelectChange} />
           <TextField className={classes.input}
-                     label='Phone Number' margin='dense'
-                     name='phone' value={phone} onChange={this.handlePhoneChange}/>
+            label='Phone Number' margin='dense'
+            name='phone' value={phone} onChange={this.handlePhoneChange} />
         </div>
         <TextField className={classes.input}
-                   style={{gridColumn: '1 / 3'}}
-                   label='Preferred Username' margin='dense'
-                   name='username' value={username} onChange={this.handleChange}/>
+          style={{gridColumn: '1 / 3'}}
+          label='Preferred Username' margin='dense'
+          name='username' value={username} onChange={this.handleChange} />
         <div className={classes.checkBox} onClick={this.toggle('terms')}>
-          <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={terms}/>
+          <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={terms} />
           &nbsp;
           <div className={classes.checkboxText}>
             I accept the TruSet <a
-            href="/terms-of-use/" target="_blank" rel="noopener noreferrer">Terms of Use</a> & <a
-            href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              href="/terms-of-use/" target="_blank" rel="noopener noreferrer">Terms of Use</a> & <a
+                href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
           </div>
         </div>
         <div className={classes.checkBox} onClick={this.toggle('updates')}>
-          <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={updates}/>
+          <input type="checkbox" style={{padding: '0 12px 0 6px'}} checked={updates} />
           &nbsp;
           <div style={{width: '95%'}}>
             <div className={classes.checkboxText}>I want to receive important email updates and offers from TruSet. (We
@@ -241,11 +245,11 @@ class form extends Component {
           </div>
         </div>
         <Button className={classes.cancelButton} onClick={close}
-                variant='outlined'>
+          variant='outlined'>
           Cancel
         </Button>
         <Button className={classes.submitButton} onClick={this.submit}
-                variant='contained' color='primary'>
+          variant='contained' color='primary'>
           Submit
         </Button>
         <div className={classes.error}>{error}</div>

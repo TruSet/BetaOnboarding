@@ -32,12 +32,12 @@ class walkthroughModal extends Component {
             }}
             action={
               <IconButton onClick={close}>
-                <Close/>
-              </IconButton>}/>
+                <Close />
+              </IconButton>} />
           <CardContent className={classes.content}>
-            {step === 0 && <ProcessOverview move={this.move} {...this.props}/>}
-            {step === 1 && <Form move={this.move(1)} {...this.props}/>}
-            {step === 2 && <Thanks move={this.move} {...this.props}/>}
+            {step === 0 && <ProcessOverview move={this.move} {...this.props} />}
+            {step === 1 && <Form move={this.move(1)} {...this.props} />}
+            {step === 2 && <Thanks move={this.move} {...this.props} />}
           </CardContent>
         </Card>
       </div>,

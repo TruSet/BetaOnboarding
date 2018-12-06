@@ -41,14 +41,14 @@ class home extends Component {
     const {modal} = this.state
     return (
       <div className={classes.root}>
-        {modal && <WalkthroughModal close={this.toggleModal(false)}/>}
+        {modal && <WalkthroughModal close={this.toggleModal(false)} />}
         <div>
           <Button variant='contained' color='primary'
-                  classes={{
+            classes={{
                     root: classes.button,
                     label: classes.buttonText,
                   }}
-                  onClick={this.toggleModal(true)}>
+            onClick={this.toggleModal(true)}>
             Join the TruSet Token Beta Community
           </Button>
         </div>

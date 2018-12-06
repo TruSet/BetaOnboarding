@@ -3,6 +3,7 @@ import injectSheet from 'react-jss'
 import Button from '@material-ui/core/Button'
 import {modalStyles} from './styles'
 
+
 const styles = theme => ({
   ...modalStyles(theme),
   root: {
@@ -57,11 +58,11 @@ const ProcessOverview = injectSheet(styles)(({classes, move}) =>
     </div>
     <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 12, width: '100%'}}>
       <Button onClick={move(-1)} className={classes.button}
-              variant='outlined'>
+        variant='outlined'>
         cancel
       </Button>
       <Button onClick={move(1)} className={classes.button}
-              variant='contained' color='primary'>
+        variant='contained' color='primary'>
         apply
       </Button>
     </div>

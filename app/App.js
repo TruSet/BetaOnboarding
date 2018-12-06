@@ -4,9 +4,10 @@ import {MuiThemeProvider} from '@material-ui/core'
 import theme from './theme'
 import React from 'react'
 
+
 const App = () =>
   <MuiThemeProvider theme={theme}>
-    <Home/>
+    <Home />
   </MuiThemeProvider>
 
 export default hot(module)(App)
