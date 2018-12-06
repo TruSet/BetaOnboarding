@@ -195,7 +195,7 @@ class form extends Component {
 
   render() {
     const {classes, close} = this.props
-    const {code, country, email, error, family, given, phone, terms, updates, username} = this.state
+    const {code, country, email, error, family, given, loading, phone, terms, updates, username} = this.state
     return (
       <div className={classes.root}>
         <h2 style={{gridColumn: '1 / 3'}}>Apply for TruSet Beta Access</h2>
@@ -249,8 +249,8 @@ class form extends Component {
           Cancel
         </Button>
         <Button className={classes.submitButton} onClick={this.submit}
-          variant='contained' color='primary'>
-          Submit
+          disabled={loading} variant='contained' color='primary'>
+          {loading ? 'Loading...' : 'Submit'}
         </Button>
         <div className={classes.error}>{error}</div>
       </div>
