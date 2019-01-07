@@ -22,17 +22,12 @@ const Thanks = injectSheet(styles)(({classes, close}) =>
     <img src="/truset_logotype.png" alt="" />
     <h2 style={{alignSelf: 'flex-start'}}>We will be in touch soon!</h2>
     <div>
-      Once the Beta is launched an email with an activation link will be sent
-      to {localStorage.getItem('email') || 'the email address you provided'}.
+      An activation link has been sent to{' '}
+      {localStorage.getItem('email') || 'the email address you provided'}.
     </div>
     <br />
-    <div>
-      In the meantime, check out <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">MetaMask</a> if
-      you dont already have it installed, as you will need it to access our
-      application.
-    </div>
-    <br /><br />
-    <Button className={classes.cancelButton} onClick={close} variant='outlined'>
+    <br />
+    <Button className={classes.cancelButton} onClick={close} variant="outlined">
       Close
     </Button>
   </div>
