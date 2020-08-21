@@ -43,7 +43,7 @@
     "rimraf": "^2.6.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.11.4",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
